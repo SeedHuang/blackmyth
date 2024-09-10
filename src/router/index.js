@@ -2,12 +2,15 @@ import { createBrowserRouter } from "react-router-dom";
 import Home from '@pages/home';
 import NotFound from '@components/notFound';
 
+const homeOptions = {
+    element: (<Home/>),
+    errorElement: (<NotFound/>)
+}
+
 const routerConfig = createBrowserRouter([
-    
     {
         path: '/home',
-        element: (<Home/>),
-        errorElement: (<NotFound/>)
+        ...homeOptions
         // ,
         // children: [
         //     {
@@ -23,17 +26,16 @@ const routerConfig = createBrowserRouter([
         //         element: (<NotFound/>)
         //     }
         // ]
-    }
+    },
     // ,
     // {
     //     path: '/detail',
     //     element: (<Detail/>)
     // },
-    // {
-    //     path: '/',
-    //     element: (<Home/>),
-    //     errorElement: <NotFound/>,
-    // }
+    {
+        path: '/',
+        ...homeOptions
+    }
 ]);
 
 export default routerConfig;

@@ -1,7 +1,6 @@
 const path = require('path');
-const cra = require('customize-cra');
-const { override, addWebpackAlias, addPostcssPlugins, watchAll } = cra;
- console.log(cra);
+const { override, addWebpackAlias, addPostcssPlugins } = require('customize-cra');
+ 
 const realPath = (pathName) => {
     return path.resolve(__dirname, pathName);
 };
@@ -23,7 +22,3 @@ module.exports = override(
         require('autoprefixer')
     ])
 );
-
-// module.exports = override(
-//     
-//   );
