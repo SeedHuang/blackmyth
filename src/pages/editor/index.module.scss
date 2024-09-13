@@ -1,0 +1,33 @@
+.pageview {
+    &__footer {
+        height: 50px;
+        display: flex;
+    }
+}
+
+.pageForm {
+    &__row {
+        display: flex;
+        flex-wrap: nowrap;
+        align-items: stretch;
+        &__th {
+            flex-basis: 80px;
+            display: flex;
+            color: #000;
+            padding: 10px;
+        }
+
+        &__td {
+            flex-grow: 1;
+            padding: 10px;
+            display: flex;
+            input {
+                flex-grow: 1;
+            }
+            textarea {
+                flex-grow: 1;
+                height: 400px;
+            }
+        }
+    }
+}
