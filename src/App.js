@@ -3,9 +3,7 @@ import routerConfig from '@router';
 
 function App() {
   return (
-    <div>
-      <RouterProvider router={routerConfig} />
-    </div>
+    <RouterProvider router={routerConfig} />
   );
 }
 

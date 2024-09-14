@@ -21,9 +21,10 @@
             flex-grow: 1;
             padding: 10px;
             display: flex;
-            input {
+            input,select {
                 flex-grow: 1;
             }
+            
             textarea {
                 flex-grow: 1;
                 height: 400px;

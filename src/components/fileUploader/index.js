@@ -44,6 +44,7 @@ const FileUploader = (props) => {
                 if(response.data.code === 200) {
                     const fileUrl = response.data.data.filename;
                     setUrl(fileUrl);
+                    props.onChange(fileUrl);
                 }
             }).catch((error) => {
                 console.log(error);

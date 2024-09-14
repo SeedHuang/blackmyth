@@ -1,13 +1,21 @@
-import axios from 'axios';
+import { sendPost, sendGet } from "@tool";
 
-
-export const addUnitInfo = (parameters) => {
-    console.log(parameters, '>>>>>>');
-    axios.post('//localhost:4000/write/unitInfo', {
+export const addUnitInfo = async (parameters) => {
+    return sendPost('//localhost:4000/write/addUnitInfo', {
         ...parameters
-    }).then((response) => {
-        console.log(response);
-    }).catch((error)=> {
-        console.log(error);
-    })
+    });
+}
+
+export const updateUnitInfo = (parameters) => {
+    return sendPost('//localhost:4000/write/updateUnitInfo', {
+        ...parameters
+    });
+}
+
+export const getCategories = async () => {
+    return sendGet('//localhost:4000/get/categories');
+}
+
+export const getUnits = async () => {
+    return sendGet('//localhost:4000/get/units');
 }

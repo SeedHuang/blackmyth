@@ -1,0 +1,8 @@
+.table__header__th {
+    background: #eee;
+    border-right: 1px solid #999;
+    color: #000;
+    &:last-of-type {
+        border-right: 0;
+    }
+}
