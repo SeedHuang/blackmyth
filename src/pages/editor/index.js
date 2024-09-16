@@ -2,33 +2,15 @@ import { useState, useEffect } from 'react';
 import Button from '@components/button';
 import FileUploader from '@components/fileUploader';
 import { addUnitInfo, getCategories } from '@api';
+import PageView from '@components/pageView';
 import classes from './index.module.scss';
-import styled from 'styled-components';
 
-const PageView = styled.div`
-    border: 1px solid red;
-    flex-grow: 1;
-    position: relative;
-    padding-bottom: 60px;
-    .pageview__footer {
-        position: absolute;
-        height: 40px;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        padding: 10px;
-        display: flex;
-        justify-content: flex-end;
-        border-top: 1px solid #999;
-        background-color: #fff;
-    }
-`;
-
-export default function EditorPage() {
+export default function EditorPage(props) {
+    const {onConfirmClick, onCancelClick} = props;
     const [title, setTitle] = useState('');
     const [breif, setBreif] = useState('');
     const [detail, setDetail] = useState('');
-    const [cate, setCate] = useState();
+    const [cate, setCate] = useState('');
     const [categories, setCategories] = useState([]);
     const [imageUrl, setImageUrl] = useState('');
     const onAddClick = async () => {
@@ -41,6 +23,7 @@ export default function EditorPage() {
                 imageUrl
             });
             console.log(response);
+            onConfirmClick(response);
         } catch(e) {
             console.log(e);
         }
@@ -52,6 +35,7 @@ export default function EditorPage() {
         setDetail('');
         setCate('');
         setImageUrl('');
+        onCancelClick();
     };
 
     useEffect(()=>{
@@ -61,9 +45,14 @@ export default function EditorPage() {
         }
         fetchData();
     }, []);
-
+    
     return (
-        <PageView>
+        <PageView footer={
+            [
+                (<Button text="添加" key="key__button__add" onClick={onAddClick}/>),
+                (<Button text="取消" key="key__button__reset" onClick={onResetClick}/>)
+            ]
+        }>
             <div className={classes.pageForm}>
                 <div className={classes.pageForm__row}>
                     <div className={classes.pageForm__row__th}>名称</div>    
@@ -71,20 +60,22 @@ export default function EditorPage() {
                 </div>
                 <div className={classes.pageForm__row}>
                     <div className={classes.pageForm__row__th}>简介</div>    
-                    <div className={classes.pageForm__row__td}><input type="text" value={breif}  onChange={(value)=>{setBreif(value.target.value)}}/></div>
+                    <div className={classes.pageForm__row__td}>
+                        <textarea value={breif} style={{height: '100px'}}onChange={(value)=>{setBreif(value.target.value)}}></textarea>
+                    </div>
                 </div>
                 <div className={classes.pageForm__row}>
                     <div className={classes.pageForm__row__th}>详情</div>    
                     <div className={classes.pageForm__row__td}>
-                        <textarea type="text" value={detail} onChange={(value)=>{setDetail(value.target.value)}}></textarea>
+                        <textarea value={detail} onChange={(value)=>{setDetail(value.target.value)}}></textarea>
                     </div>
                 </div>
                 <div className={classes.pageForm__row}>
                     <div className={classes.pageForm__row__th}>类别</div>    
                     <div className={classes.pageForm__row__td}>
-                        <select value={cate} onChange={ (result) => { setCate(result.target.value) } }>
+                        <select value={cate}  onChange={ (result) => { setCate(result.target.value) } }>
                             {
-                                categories.map(({label, value}) => {
+                                categories.map(({label, value}, index) => {
                                     return (<option key={`key_option_${value}`} value={value}>{label}</option>)
                                 })
                             }
@@ -97,10 +88,6 @@ export default function EditorPage() {
                         <FileUploader value={imageUrl} onChange={(value)=>{setImageUrl(value)}}/>
                     </div>
                 </div>
-            </div>
-            <div className="pageview__footer">
-                <Button text="添加" onClick={onAddClick}/>
-                <Button text="取消" onClick={onResetClick}/>
             </div>
         </PageView>
     );

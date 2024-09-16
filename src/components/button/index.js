@@ -1,15 +1,9 @@
-import styled from 'styled-components'
+import classNames from 'classnames';
+import { combineComponentClass } from '@tool';
+import classes from './index.module.scss';
 
-const Button = styled.div`
-    border:1px solid #999;
-    padding: 10px 20px;
-    color: #999;
-    font-size: 14px;
-    margin-left: 10px;
-    border-radius: 4px;
-    cursor: pointer;
-`;
 
-export default function StyledButton(props) {
-    return <Button onClick={props.onClick}>{props.text}</Button>
+export default function Button(props) {
+    const classnames = combineComponentClass(props, classes.button)
+    return <button className={classNames(classnames)} onClick={props.onClick}>{props.text}</button>
 }

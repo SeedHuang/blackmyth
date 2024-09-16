@@ -17,7 +17,8 @@ const columns = [
     {
         field: 'detail',
         fieldName: '详情',
-        width: 'auto'
+        width: 'auto',
+        tdVisibleLine: 3
     },
     {
         field: 'imageurl',

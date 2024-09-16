@@ -1,7 +1,9 @@
+@import '@global/var';
+
 .table__body__row__td {
     word-break: break-all;
     white-space: 0;
-    border-right: 1px solid #999;
+    border-right: 1px solid $bdColor1;
     &:last-of-type {
         border-right: 0;
     }

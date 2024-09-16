@@ -6,7 +6,6 @@ export const sendPost = async (url, parameter) => {
             if(result.data.code === 200) {
                 resolve(result.data);
             } else {
-                console.log('on error branch');
                 reject(result.data);
             }
         }).catch((error)=> {
@@ -21,11 +20,19 @@ export const sendGet = async (url, parameter = {}) => {
             if(result.data.code === 200) {
                 resolve(result.data);
             } else {
-                console.log('on error branch');
                 reject(result.data);
             }
         }).catch((error)=> {
             reject(error);
         })
     });
+}
+
+export const combineComponentClass = function (props = {}, originClassName = '') {
+    const { className = '' } = props;
+    const classnames = [originClassName];
+    if(className) {
+        classnames.push(className);
+    }
+    return classnames;
 }

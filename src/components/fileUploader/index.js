@@ -40,7 +40,6 @@ const FileUploader = (props) => {
             const formData = new FormData();
             formData.append('image', file);
             axios.post('//localhost:4000/write/uploadimage', formData).then((response) => {
-                console.log(response);
                 if(response.data.code === 200) {
                     const fileUrl = response.data.data.filename;
                     setUrl(fileUrl);
