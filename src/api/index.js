@@ -19,3 +19,7 @@ export const getCategories = async () => {
 export const getUnits = async () => {
     return sendGet('//localhost:4000/get/units');
 }
+
+export const getUnitById = async (id) => {
+    return sendGet('//localhost:4000/get/unitById', {id});
+}

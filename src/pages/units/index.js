@@ -7,16 +7,18 @@ import Button from '@components/button';
 import Dialog from '@components/dialog';
 import Editor from '@pages/editor';
 import PageView from '@components/pageView'
+import { useContext } from 'react';
+import { GlobalContext } from '@src/App';
+import { useFetchUnit } from '@hooks/fetchs/units'
+
+
+
+
 export default function Units() {
-    const [rows, setRows] = useState([]);
+    const { AlertDialog } = useContext(GlobalContext);
+    
     const [showEditor, setShowEditor] = useState(false);
-    async function fetchUnitData() {
-        const { data: { rows } } = await getUnits();
-        setRows(rows);
-    }
-    useEffect(function() {
-        fetchUnitData();
-    }, []);
+    const { rows } = useFetchUnit();
 
     function onAddClick () {
         setShowEditor(true);
@@ -29,7 +31,6 @@ export default function Units() {
     function onEditroCancelClick() {
         setShowEditor(false);
     }
-    console.log(showEditor, '????')
     return (
         <PageView>
             <ToolBar>

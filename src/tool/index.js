@@ -1,5 +1,6 @@
 import axios from 'axios';
-
+import { GlobalContext } from '../App';
+import { useContent } from 'react';
 export const sendPost = async (url, parameter) => {
     return new Promise((resolve, reject) => {
         axios.post(url, parameter).then((result)=>{
@@ -36,3 +37,4 @@ export const combineComponentClass = function (props = {}, originClassName = '')
     }
     return classnames;
 }
+

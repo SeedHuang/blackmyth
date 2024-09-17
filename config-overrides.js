@@ -12,7 +12,8 @@ const pathAlias = {
     '@pages': realPath('src/pages'),
     '@router': realPath('src/router'),
     '@global': realPath('src/global'),
-    '@tool': realPath('src/tool')
+    '@tool': realPath('src/tool'),
+    '@hooks': realPath('src/hooks')
   // 添加更多的alias
 };
 
