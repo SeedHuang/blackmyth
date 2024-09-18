@@ -4,7 +4,6 @@ function toolbar (props) {
     // const { children } = props;
     const leftChildren = [];
     const rightChildren = [];
-    console.count('render toolbar');
     if(props.children && props.children.length > 1) {
         props.children.forEach((child)=>{
             if(child.props.right === true) {

@@ -6,7 +6,6 @@ function dialog (props) {
     const { mode = 'halfScreen', isShow = false } = props;
     switch(mode) {
         case 'halfScreen':
-            console.log(isShow, '>>>>');
             return (
                 <HalfScreenDialog isShow={ isShow }>
                     { props.children }

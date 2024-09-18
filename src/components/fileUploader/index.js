@@ -1,6 +1,7 @@
 import styled from 'styled-components';
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import axios from 'axios';
+import classes from './index.module.scss'
 const Container = styled.div`
     display: flex;
     flex-grow: 1;
@@ -50,15 +51,17 @@ const FileUploader = (props) => {
             });
         }
     };
-
+    useEffect(function(){
+        setUrl(props.value);
+    }, [props.value]);
     return (
-        <Container>
-            <input type="text" readOnly="readonly" className="fileUploader__url" value={url}></input>
-            <div className="fileUploader__button" onClick={onBrowserClick}>浏览文件...</div>
-            <div className="fileUploader__hidden">
+        <div className={classes.fileuploader}>
+            <input type="text" readOnly="readonly" className={classes.fileUploader__url} value={url}></input>
+            <div className={classes.fileUploader__button} onClick={onBrowserClick}>浏览文件...</div>
+            <div className={classes.fileUploader__hidden}>
                 <input ref={fileRef} type="file" accept="image/*" onChange={onUploadChange}/>
             </div>
-        </Container>
+        </div>
     );
 };
 

@@ -1,10 +1,10 @@
-import { useState } from 'react';
+import { useState, memo } from 'react';
 import DialogBg from './dialogBg';
 import classes from './halfScreenDialog.module.scss';
 
-export default function HalfScreen(props) {
+function HalfScreen(props) {
     const { isShow } = props;
-
+    // console.count('halfscreen')
     return (
         <DialogBg isShow={isShow}>
             <div className={classes.dialog__halfscreen}>
@@ -13,3 +13,5 @@ export default function HalfScreen(props) {
         </DialogBg>        
     );
 }
+
+export default memo(HalfScreen);

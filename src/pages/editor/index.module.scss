@@ -23,12 +23,15 @@
             flex-grow: 1;
             padding: $paddingL;
             display: flex;
-            input,select {
+            input,select, textarea {
                 flex-grow: 1;
+            }
+
+            input:focus, select:focus, textarea:focus {
+                outline: none;
             }
             
             textarea {
-                flex-grow: 1;
                 height: 400px;
             }
         }

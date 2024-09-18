@@ -6,6 +6,8 @@ import Alert from '@components/dialog/alert';
 
 export const GlobalContext = createContext();
 
+
+
 function App() {
     const [ isShow, setIsShow ] = useState(false);
     const [ dialogContent, setDialogContent ] = useState([]);

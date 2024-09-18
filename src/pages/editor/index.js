@@ -1,32 +1,52 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, memo } from 'react';
 import Button from '@components/button';
 import FileUploader from '@components/fileUploader';
-import { addUnitInfo, getCategories } from '@api';
+import { addUnitInfo, getCategories, getUnitById, updateUnitInfo } from '@api';
+import { useGetUnitById } from '@hooks/fetchs/units';
 import PageView from '@components/pageView';
 import classes from './index.module.scss';
 
-export default function EditorPage(props) {
-    const {onConfirmClick, onCancelClick} = props;
+function EditorPage(props) {
+    const {onConfirmClick, onCancelClick } = props;
+    const [id, setId] = useState(props.id);
     const [title, setTitle] = useState('');
     const [breif, setBreif] = useState('');
     const [detail, setDetail] = useState('');
     const [cate, setCate] = useState('');
     const [categories, setCategories] = useState([]);
     const [imageUrl, setImageUrl] = useState('');
+    
+    
     const onAddClick = async () => {
-        try {
-            const response = await addUnitInfo({
-                title,
-                breif,
-                detail,
-                cate,
-                imageUrl
-            });
-            console.log(response);
-            onConfirmClick(response);
-        } catch(e) {
-            console.log(e);
+        if (!!id) {
+            try {
+                const response = await updateUnitInfo({
+                    id,
+                    title,
+                    breif,
+                    detail,
+                    cate,
+                    imageUrl
+                });
+                onConfirmClick(response);
+            } catch(e) {
+                console.log(e);
+            }
+        } else {
+            try {
+                const response = await addUnitInfo({
+                    title,
+                    breif,
+                    detail,
+                    cate,
+                    imageUrl
+                });
+                onConfirmClick(response);
+            } catch(e) {
+                console.log(e);
+            }
         }
+        
         
     };
     const onResetClick = () => {
@@ -46,10 +66,31 @@ export default function EditorPage(props) {
         fetchData();
     }, []);
     
+    useEffect(()=>{
+        if(!!id) {
+            async function fetchGetUnitById(_id) {
+                    try {
+                        const { data } = await getUnitById(_id);
+                        console.log('data is :', data);
+                        setTitle(data.title);
+                        setDetail(data.detail);
+                        setBreif(data.breif);
+                        setCate(data.cate);
+                        setImageUrl(data.imageurl);
+                    } catch(e) {
+                        console.log(e);
+                    }
+            }
+            fetchGetUnitById(id)
+        }
+    }, [id])
+
+    
+    
     return (
         <PageView footer={
             [
-                (<Button text="添加" key="key__button__add" onClick={onAddClick}/>),
+                (<Button text={!!id ? "修改" : "添加"} key="key__button__add" onClick={onAddClick}/>),
                 (<Button text="取消" key="key__button__reset" onClick={onResetClick}/>)
             ]
         }>
@@ -92,3 +133,5 @@ export default function EditorPage(props) {
         </PageView>
     );
 }
+
+export default memo(EditorPage);
