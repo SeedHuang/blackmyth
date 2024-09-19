@@ -8,6 +8,7 @@ import Editor from '@pages/editor';
 import PageView from '@components/pageView';
 import { useFetchUnit } from '@hooks/fetchs/units';
 import { useCallback } from 'react';
+import classes from './index.module.scss';
 
 
 
@@ -56,6 +57,8 @@ export default function Units() {
             type: 'option',
             fieldName: '操作',
             width: '200px',
+            hAlign: 'center',
+            vAlign: 'center',
             setChildren: ({row})=> {
                 return (
                     [
@@ -95,7 +98,10 @@ export default function Units() {
             <ToolBar>
                 <Button text="添加" onClick={onAddClick}/>
             </ToolBar>
-            <Table columns={columns} rows={rows} />
+            <div className={classes.container__wrap}>
+                <Table columns={columns} rows={rows} />
+            </div>
+            
             {
                 showEditor && (
                     <HalfScreenDialog isShow={showEditor}>

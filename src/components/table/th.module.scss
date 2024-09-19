@@ -1,6 +1,7 @@
 @import '@global/var';
 
 .table__header__th {
+    display: flex;
     background: #eee;
     border-right: 1px solid $bdColor1;
     color: $fontColor1;

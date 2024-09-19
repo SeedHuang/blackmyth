@@ -4,6 +4,7 @@
     padding: $paddingL;
     display: flex;
     flex-wrap: nowrap;
+    border-bottom: 1px solid $bdColor1;
     &__left {
         flex-grow: 1;
         display: flex;

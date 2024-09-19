@@ -1,7 +1,7 @@
 import classes from './th.module.scss';
 
 export default function th(props) {
-    const { width, field, fieldName, type } = props;
+    const { width, field, fieldName, type, hAlign, vAlign } = props;
     const style = {};
     if(width) {
         if(width !== 'auto') {
@@ -11,6 +11,12 @@ export default function th(props) {
             style.flexGrow = 1;
             style.flexShrink = 1;
         }
+    }
+    if(hAlign) {
+        style['justify-content'] = 'center';
+    }
+    if(vAlign) {
+        style['align-items'] = 'center';
     }
     if(type === 'option') {
         return (

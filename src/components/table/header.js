@@ -7,7 +7,7 @@ export default function header (props) {
         <div className={classes.table__header}>
             {
                 columns.map((column)=>{
-                    const { width, type, field, fieldName } = column;
+                    const { width, type, field, fieldName, hAlign, vAlign  } = column;
                     let key = '';
                     if (type === 'option') {
                         key = 'key_theader_th_option';
@@ -15,7 +15,7 @@ export default function header (props) {
                         key = `key_theader_th_${field}`;
                     }
                     return (
-                        <TH key={key} width={width} type={type} field={field} fieldName={fieldName} />
+                        <TH key={key} width={width} type={type} field={field} fieldName={fieldName} hAlign={hAlign} vAlign={vAlign}  />
                     )
                 })
             }

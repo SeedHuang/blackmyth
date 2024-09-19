@@ -31,6 +31,14 @@ export default function td(props) {
             style.flexShrink = 1;
         }
     }
+
+    if(column.hAlign) {
+        style['justify-content'] = 'center';
+    }
+    if(column.vAlign) {
+        style['align-items'] = 'center';
+    }
+
     if(column.type === 'option') {
         return (
             <div

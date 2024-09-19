@@ -44,7 +44,10 @@ function App() {
     return (
         <GlobalContext.Provider value={globalValue}>
             <div className={classes.container}>
-                <RouterProvider router={routerConfig} />        
+                <div className={classes.container__menu}></div>
+                <div className={classes.container__content}>
+                    <RouterProvider router={routerConfig} />  
+                </div>  
                 <Alert
                     isShow={isShow}
                     onConfirmClick={onConfirmHandler}

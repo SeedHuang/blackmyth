@@ -9,7 +9,7 @@ const homeOptions = {
     errorElement: (<NotFound/>)
 }
 
-const routerConfig = createBrowserRouter([
+export const pathConfig = [
     {
         path: '/home',
         ...homeOptions
@@ -46,6 +46,7 @@ const routerConfig = createBrowserRouter([
         path: '/',
         ...homeOptions
     }
-]);
+];
+const routerConfig = createBrowserRouter(pathConfig);
 
 export default routerConfig;
