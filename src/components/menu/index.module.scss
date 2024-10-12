@@ -1,0 +1,17 @@
+@import '@global/var';
+
+.menu {
+    &__item {
+        padding-left: $paddingS;
+        padding-top:  $paddingS;
+        padding-bottom: $paddingS;
+        font-size: 12px;
+        &:hover {
+            cursor: pointer;
+            background: #ccc;
+        }
+        &--selected {
+            background: #ccc;
+        }
+    }
+}

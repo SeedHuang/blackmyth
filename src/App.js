@@ -1,11 +1,17 @@
-import { RouterProvider } from 'react-router-dom';
+import { RouterProvider, BrowserRouter, Routes, Route } from 'react-router-dom';
 import routerConfig from '@router';
-import { createContext, useState } from 'react';
+import { createContext, useState, lazy, Suspense, useCallback } from 'react';
 import classes from './app.module.scss';
 import Alert from '@components/dialog/alert';
+import Menu from '@components/menu';
+import Loading from '@pages/loading';
+
 
 export const GlobalContext = createContext();
 
+const AsyncHome = lazy(()=>{ return import('@pages/home')});
+const AsyncEditor = lazy(()=>{ return import('@pages/editor')});
+const AsyncUnits = lazy(()=>{ return import('@pages/units')});
 
 
 function App() {
@@ -13,7 +19,7 @@ function App() {
     const [ dialogContent, setDialogContent ] = useState([]);
     const [ dialogMethods, setDialogMethods ] = useState({});
     const { onConfirmHandler, onCancelHandler } = dialogMethods;
-    
+    const [ routeComponents, setRouteComponents ] = useState([]);
     const globalValue = {
         // AlertDialog.show({
         //     content: (<div>Hello World</div>),
@@ -40,13 +46,24 @@ function App() {
             }
         }
     };
-
+    const onRouterFetched = useCallback((_routeComponents)=> {
+        setRouteComponents(_routeComponents);
+    }, [routeComponents]);
     return (
         <GlobalContext.Provider value={globalValue}>
+            <BrowserRouter>
             <div className={classes.container}>
-                <div className={classes.container__menu}></div>
+                <div className={classes.container__menu}>
+                    <Menu onRouterFetched={onRouterFetched}/>
+                </div>
                 <div className={classes.container__content}>
-                    <RouterProvider router={routerConfig} />  
+                    
+                        <Suspense fallback={<Loading/>}>
+                            <Routes>
+                                 {routeComponents}
+                            </Routes>
+                        </Suspense>
+                    
                 </div>  
                 <Alert
                     isShow={isShow}
@@ -55,6 +72,7 @@ function App() {
                     { dialogContent }
                 </Alert>
             </div>
+            </BrowserRouter>
         </GlobalContext.Provider>
         
     );

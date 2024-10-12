@@ -1,25 +1,33 @@
 import { sendPost, sendGet } from "@tool";
 
+function localPath( pathName ) {
+    return `//localhost:4000/${pathName}`;
+}
+
 export const addUnitInfo = async (parameters) => {
-    return sendPost('//localhost:4000/write/addUnitInfo', {
+    return sendPost(localPath('write/addUnitInfo'), {
         ...parameters
     });
 }
 
 export const updateUnitInfo = (parameters) => {
-    return sendPost('//localhost:4000/write/updateUnitInfo', {
+    return sendPost(localPath('write/updateUnitInfo'), {
         ...parameters
     });
 }
 
 export const getCategories = async () => {
-    return sendGet('//localhost:4000/get/categories');
+    return sendGet(localPath('get/categories'));
 }
 
 export const getUnits = async () => {
-    return sendGet('//localhost:4000/get/units');
+    return sendGet(localPath('get/units'));
 }
 
 export const getUnitById = async (id) => {
-    return sendGet('//localhost:4000/get/unitById', {id});
+    return sendGet(localPath('get/unitById'), {id});
+}
+
+export const getRouters = async () => {
+    return sendGet(localPath('get/routers'));
 }
