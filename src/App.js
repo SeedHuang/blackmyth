@@ -57,13 +57,11 @@ function App() {
                     <Menu onRouterFetched={onRouterFetched}/>
                 </div>
                 <div className={classes.container__content}>
-                    
-                        <Suspense fallback={<Loading/>}>
-                            <Routes>
-                                 {routeComponents}
-                            </Routes>
-                        </Suspense>
-                    
+                    <Suspense fallback={<Loading/>}>
+                        <Routes>
+                                {routeComponents}
+                        </Routes>
+                    </Suspense>
                 </div>  
                 <Alert
                     isShow={isShow}
